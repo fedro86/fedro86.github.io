@@ -2,20 +2,56 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background: linear-gradient(to right, #ece9e6, #ffffff);
+    background: linear-gradient(to right, #ADD8E6, #FFFFFF); /* Light blue to white gradient */
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
 }
 
 .container {
     text-align: center;
-    background-color: #fff;
-    padding: 40px;
+    background-image: url('asset/cockpit.png');
+    background-size: cover;
+    background-position: center;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: min(400px, 90vw);
+    height: auto;
+    aspect-ratio: 9 / 16;
+    max-height: 70vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative; /* Needed for pseudo-element positioning */
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent dark overlay */
+    border-radius: 10px; /* Match container border-radius */
+    z-index: 1; /* Place above background image but below content */
+}
+
+.container-content {
+    padding: 40px; /* Apply padding to the inner content */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%; /* Ensure content fills the container */
+    width: 100%;
+    position: relative; /* Place content above the overlay */
+    z-index: 2; /* Ensure content is above the overlay */
 }
 
 .avatar {
@@ -28,41 +64,163 @@ body {
 
 h1 {
     font-size: 2em;
-    margin: 0;
+    margin: -60px;
+    color: #ffffff; /* White for better visibility against dark overlay */
 }
 
 p {
     font-size: 1.2em;
-    color: #666;
-    margin-top: 10px;
+    color: #f0f0f0; /* Light grey for better visibility against dark overlay */
+    margin-top: -10px; /* Negative margin to bring closer */
 }
 
 .links {
     margin-top: 30px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.links-wrapper {
+    display: flex;
+    white-space: nowrap;
+    animation: scroll-left 20s linear infinite;
+}
+
+.links-wrapper:hover {
+    animation-play-state: paused;
 }
 
 .link {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #2c3e50;
-    color: #fff;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 5px;
+    background-color: #ffffff; /* White background for Material Design look */
+    color: #3f51b5; /* Material Design primary blue for text/icons */
+    width: 100px;
+    height: 100px;
+    margin: 0 10px;
+    border-radius: 4px; /* Slightly less rounded for a sharper look */
     text-decoration: none;
-    font-size: 1.1em;
-    transition: all 0.3s;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 0.45em;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1); /* Material Design-like transition */
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); /* Material Design shadow */
+    flex-shrink: 0;
 }
 
 .link i {
-    margin-right: 10px;
-    font-size: 1.3em;
+    margin-bottom: 5px; /* Space between icon and text */
+    font-size: 5em; /* Even bigger icon size */
 }
 
 .link:hover {
-    background-color: #34495e;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background-color: #e8eaf6; /* Lighter blue on hover */
+    transform: translateY(-3px); /* More pronounced lift on hover */
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); /* Deeper shadow on hover */
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-50%); /* Move by the width of one set of buttons */
+    }
+}
+
+.mail-button {
+    position: absolute;
+    top: 20px;
+    right: 55px; /* Positioned 20px from the right edge of the padded content area */
+    background: none;
+    border: none;
+    color: #ffffff;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.7em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    transition: all 0.3s ease;
+    z-index: 3;
+}
+
+.mail-button i {
+    font-size: 2.5em; /* Much bigger icon size */
+    color: #ffffff; /* White icon */
+    margin-bottom: 3px; /* Space between icon and text */
+}
+
+.mail-button:hover {
+    background-color: #3f51b5;
+    color: #ffffff;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 10; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    color: #333; /* Darker color for readability */
+}
+
+.modal-content h2 {
+    color: #333; /* Ensure heading is also readable */
+}
+.modal-content p {
+    color: #333; /* Ensure heading is also readable */
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.mail-link {
+    display: inline-block;
+    background-color: #3f51b5;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.mail-link:hover {
+    background-color: #303f9f;
 }

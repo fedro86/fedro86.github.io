@@ -9,15 +9,33 @@
 </head>
 <body>
     <div class="container">
-        <img src="asset/foto_profilo.jpg" alt="Federico Conticello" class="avatar">
-        <h1>Federico Conticello</h1>
-        <p>Innovation Program Lead</p>
-        <div class="links">
-            <a href="https://www.linkedin.com/in/federicoconticello/" class="link"><i class="fab fa-linkedin"></i> LinkedIn</a>
-            <a href="https://medium.com/@federicorosario.conticello" class="link"><i class="fab fa-medium"></i> Medium Blog</a>
-            <a href="https://scholar.google.com/citations?user=PuQg7MMAAAAJ&hl=en&oi=ao" class="link"><i class="fas fa-graduation-cap"></i> Google Scholar</a>
-            <a href="https://www.researchgate.net/profile/Federico-Rosario-Conticello" class="link"><i class="fab fa-researchgate"></i> ResearchGate</a>
+        <div class="container-content">
+            <img src="asset/foto_profilo.jpg" alt="Federico Conticello" class="avatar">
+            <h1>Federico Conticello</h1>
+            <p>Innovation Program Lead</p>
+            <button class="mail-button" id="openMailModal"><i class="fas fa-envelope"></i> Write me!</button>
+            <div class="links">
+                <div class="links-wrapper">
+                    <a href="https://www.linkedin.com/in/federicoconticello/" class="link"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://medium.com/@federicorosario.conticello" class="link"><i class="fab fa-medium"></i> Medium Blog</a>
+                    <a href="https://scholar.google.com/citations?user=PuQg7MMAAAAJ&hl=en&oi=ao" class="link"><i class="fas fa-graduation-cap"></i> Google Scholar</a>
+                    <a href="https://www.researchgate.net/profile/Federico-Rosario-Conticello" class="link"><i class="fab fa-researchgate"></i> ResearchGate</a>
+                    <a href="https://www.linkedin.com/in/federicoconticello/" class="link"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://medium.com/@federicorosario.conticello" class="link"><i class="fab fa-medium"></i> Medium Blog</a>
+                    <a href="https://scholar.google.com/citations?user=PuQg7MMAAAAJ&hl=en&oi=ao" class="link"><i class="fas fa-graduation-cap"></i> Google Scholar</a>
+                    <a href="https://www.researchgate.net/profile/Federico-Rosario-Conticello" class="link"><i class="fab fa-researchgate"></i> ResearchGate</a>
+                </div>
+            </div>
         </div>
     </div>
+    <script src="script.js"></script>
 </body>
+<div id="mailModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Send me an email!</h2>
+        <p>Click the button below to compose an email:</p>
+        <a href="mailto:your-email@example.com?subject=Hello%20Federico&body=Hi%20Federico," class="mail-link">Compose Email</a>
+    </div>
+</div>
 </html>
